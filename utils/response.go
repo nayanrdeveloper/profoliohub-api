@@ -2,27 +2,26 @@ package utils
 
 import "github.com/gin-gonic/gin"
 
-
 func BuildErrorResponse(message string, err string) gin.H {
 	return gin.H{
-		"status": "error",
+		"status":  "error",
 		"message": message,
-		"error": err,
+		"error":   err,
 	}
 }
 
-func BuildSuccessResponse(message string, data interface{}) gin.H  {
+func BuildSuccessResponse(message string, data interface{}) gin.H {
 	return gin.H{
-		"status": "success",
+		"status":  "success",
 		"message": message,
-		"data": data,
+		"data":    data,
 	}
 }
 
-func ResponseWithError(c *gin.Context, statusCode int, message string, err string)  {
+func ResponseWithError(c *gin.Context, statusCode int, message string, err string) {
 	c.JSON(statusCode, BuildErrorResponse(message, err))
 }
 
-func ResponseWithSucess(c *gin.Context, statusCode int, message string, data interface{})  {
+func ResponseWithSucess(c *gin.Context, statusCode int, message string, data interface{}) {
 	c.JSON(statusCode, BuildSuccessResponse(message, data))
 }

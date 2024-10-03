@@ -14,6 +14,6 @@ func main() {
 	db := database.ConnectDB()
 
 	r := gin.Default()
-	routes.SetUpRoute(r,db)
+	routes.SetUpRoute(r, db)
 	log.Fatal(r.Run(":8080"))
 }
