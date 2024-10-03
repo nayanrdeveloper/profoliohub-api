@@ -14,8 +14,8 @@ var DB *mongo.Database
 
 func ConnectDB() *mongo.Database {
 	clientOptions := options.Client().ApplyURI(os.Getenv("MONGO_URI"))
-	
-	ctx, cancel :=context.WithTimeout(context.Background(), 10*time.Second)
+
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
 	client, err := mongo.Connect(ctx, clientOptions)
@@ -24,8 +24,8 @@ func ConnectDB() *mongo.Database {
 	}
 
 	// Ping the database to ensure the connection is working
-	err = client.Ping(ctx,nil)
-	if err != nil{
+	err = client.Ping(ctx, nil)
+	if err != nil {
 		log.Fatal(err)
 	}
 
@@ -36,6 +36,6 @@ func ConnectDB() *mongo.Database {
 	return DB
 }
 
-func GetCollection(collectionName string) *mongo.Collection  {
+func GetCollection(collectionName string) *mongo.Collection {
 	return DB.Collection(collectionName)
 }
