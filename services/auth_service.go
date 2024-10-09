@@ -37,7 +37,7 @@ func (s *AuthService) Login(email string, password string) (string, error) {
 		return "", errors.New("invalid credentials")
 	}
 
-	token, err := utils.GenerateJWT(user.Email)
+	token, err := utils.GenerateJWT(user.ID.Hex())
 	if err != nil {
 		return "", err
 	}

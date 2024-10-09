@@ -13,7 +13,7 @@ func main() {
 	config.LoadConfig()
 	db := database.ConnectDB()
 
-	r := gin.Default()
-	routes.SetUpRoute(r, db)
-	log.Fatal(r.Run(":8080"))
+	router := gin.Default()
+	routes.SetUpRoutes(router, db)
+	log.Fatal(router.Run(":8080"))
 }
