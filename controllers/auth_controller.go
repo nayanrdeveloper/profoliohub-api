@@ -35,16 +35,16 @@ func (ctrl *AuthController) Register(c *gin.Context) {
 func (ctrl *AuthController) Login(c *gin.Context) {
 	var user models.User
 	if err := c.ShouldBindJSON(&user); err != nil {
-		c.JSON(http.StatusOK, utils.BuildErrorResponse("Invalid Data", err.Error()))
+		c.JSON(http.StatusBadRequest, utils.BuildErrorResponse("Invalid Data", err.Error()))
 		return
 	}
 
-	token, err := ctrl.authService.Login(user.Email, user.Password)
+	token, loggedInUser, err := ctrl.authService.Login(user.Email, user.Password)
 	if err != nil {
 		c.JSON(http.StatusUnauthorized, utils.BuildErrorResponse("Authentication failed", err.Error()))
 		return
 	}
 
-	c.JSON(http.StatusOK, utils.BuildSuccessResponse("Login Successful", gin.H{"token": token}))
+	c.JSON(http.StatusOK, utils.BuildSuccessResponse("Login Successful", gin.H{"token": token, "user": gin.H{"id": loggedInUser.ID.Hex(), "email": loggedInUser.Email, "first_name": loggedInUser.FirstName, "last_name": loggedInUser.LastName}}))
 
 }
