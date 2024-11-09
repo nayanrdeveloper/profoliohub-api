@@ -5,7 +5,6 @@ import (
 	"profoliohub-api/config"
 	"profoliohub-api/database"
 	"profoliohub-api/routes"
-
 	"github.com/gin-gonic/gin"
 )
 
